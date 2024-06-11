@@ -1,32 +1,6 @@
 #include <bits/stdc++.h>
+#include "./header/geometry.h"
 using namespace std;
-
-// Data Structure
-struct Point
-{
-    double x;
-    double y;
-    double z;
-};
-
-struct Vector
-{
-    double x;
-    double y;
-    double z;
-};
-
-struct Line
-{
-    Point StartPoint;
-    Vector DirectionVector;
-};
-
-struct Plane
-{
-    Point StartPoint;
-    Vector NormalVector;
-};
 
 // Constructors
 Vector ContructVectorFromPoints(Point A, Point B)
@@ -91,7 +65,7 @@ double DistanceBetweenPointAndLine(Point A, Line L)
     return crossProductLength / directionVectorLength;
 }
 
-// Standard IO
+// IO
 Point PointInput(string msg)
 {
     cout << msg << " > \n";
