@@ -2,7 +2,6 @@
 #include "./header/geometry.h"
 using namespace std;
 
-// Constructors
 Vector ContructVectorFromPoints(Point A, Point B)
 {
     Vector res;
@@ -20,7 +19,6 @@ Line ConstructLineFromPoints(Point A, Point B)
     return res;
 }
 
-// 3D math utils
 double Matrix(double A, double B, double C, double D)
 {
     return (double)(A * D - B * C);
@@ -45,7 +43,6 @@ double LengthOfVector(Vector A)
     return sqrt((pow(A.x, 2) + pow(A.y, 2) + pow(A.z, 2)));
 }
 
-// Modules
 double DistanceOfLines(Line A, Line B)
 {
     Vector CrossProdOfLines = CrossProd(A.DirectionVector, B.DirectionVector);
@@ -65,7 +62,36 @@ double DistanceBetweenPointAndLine(Point A, Line L)
     return crossProductLength / directionVectorLength;
 }
 
-// IO
+double DistanceBetweenParallelPlanes(Plane P1, Plane P2)
+{
+    Vector diff = ContructVectorFromPoints(P1.StartPoint, P2.StartPoint);
+    return abs(DotProd(diff, P1.NormalVector)) / LengthOfVector(P1.NormalVector);
+}
+
+double AngleBetweenPlanes(Plane P1, Plane P2)
+{
+    double dot = DotProd(P1.NormalVector, P2.NormalVector);
+    double len1 = LengthOfVector(P1.NormalVector);
+    double len2 = LengthOfVector(P2.NormalVector);
+    double cosTheta = dot / (len1 * len2);
+    return acos(cosTheta);
+}
+
+double DistanceBetweenParallelLineAndPlane(Line L, Plane P)
+{
+    Vector diff = ContructVectorFromPoints(P.StartPoint, L.StartPoint);
+    return abs(DotProd(diff, P.NormalVector)) / LengthOfVector(P.NormalVector);
+}
+
+double AngleBetweenLineAndPlane(Line L, Plane P)
+{
+    double dot = DotProd(L.DirectionVector, P.NormalVector);
+    double len1 = LengthOfVector(L.DirectionVector);
+    double len2 = LengthOfVector(P.NormalVector);
+    double cosTheta = abs(dot) / (len1 * len2);
+    return asin(cosTheta);
+}
+
 Point PointInput(string msg)
 {
     cout << msg << " > \n";
@@ -84,7 +110,6 @@ void VectorOutput(Vector A)
     cout << setprecision(16) << "(" << A.x << ", " << A.y << ", " << A.z << ")";
 }
 
-// Main thread
 int main()
 {
 
